@@ -17,3 +17,8 @@ class editform(ModelForm):
     class Meta:
         model = Profile
         fields = ('designation','education','research_interest','publications')
+
+class studentform(ModelForm):
+    class Meta:
+        model=Students
+        fields = ('supervisor','name','details')
