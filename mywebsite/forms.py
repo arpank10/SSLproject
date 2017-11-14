@@ -21,4 +21,4 @@ class editform(ModelForm):
 class studentform(ModelForm):
     class Meta:
         model=Students
-        fields = ('supervisor','name','details')
+        fields = ('name','details')

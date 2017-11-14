@@ -13,6 +13,6 @@ urlpatterns = [
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'mywebsite:login'}, name='logout'),
     url(r'^signup/$', core_views.signup, name='signup'),
-
+    url(r'^details/studentupdate/(?P<whoami>[a-zA-Z0-9_]+)$', core_views.profstudents , name='students')
 
 ]

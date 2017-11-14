@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 
 from mywebsite.forms import SignUpForm
 from mywebsite.forms import editform
+from mywebsite.forms import studentform
 from django.contrib.auth.models import User
 from mywebsite.models import Profile
 
@@ -65,3 +66,19 @@ def updatedetails(request,whoami):
     else:
         form = editform()
     return render(request, 'editform.html' , {'form': form})
+
+def profstudents(request,whoami):
+    user=User.objects.filter(username=whoami)[0]
+    prof=Profile.objects.filter(user=user)[0]
+    if request.method== 'POST':
+        form = studentform(request.POST)
+        if form.is_valid():
+            stud = form.save(commit=False)
+            stud.supervisor = prof
+            stud.name = form.cleaned_data.get('name')
+            stud.details = form.cleaned_data.get('details')
+            stud.save()
+            return redirect ( 'mywebsite:detail' , person=prof )
+    else:
+        form=studentform()
+    return render( request, 'update_students.html' , { 'form':form })
