@@ -10,15 +10,19 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username','first_name','second_name', 'webmail', 'password1', 'password2', )
-
+        fields = ('username','first_name','second_name', 'webmail', 'password1', 'password2')
 
 class editform(ModelForm):
     class Meta:
-        model = Profile
-        fields = ('designation','education','research_interest','publications')
+        model=Profile
+        fields = ('designation','first_name','second_name', 'webmail','phone_number','fax_number', 'department')
 
 class studentform(ModelForm):
     class Meta:
         model=Students
         fields = ('name','details')
+
+class publicationform(ModelForm):
+    class Meta:
+        model=Publica
+        fields=('publication_title','collaborator','collaborator_email')

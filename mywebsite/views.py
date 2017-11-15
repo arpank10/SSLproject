@@ -4,17 +4,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 
-from mywebsite.forms import SignUpForm
-from mywebsite.forms import editform
-from mywebsite.forms import studentform
+from mywebsite.forms import *
+from mywebsite.forms import publicationform
 from django.contrib.auth.models import User
 from mywebsite.models import Profile
 
 
 @login_required
 def home(request):
-    return render(request, 'home.html')
-
+    user= request.user
+    prof=Profile.objects.filter(user=user)[0]
+    return render(request,'prof_detail.html', {'prof':prof})
 
 def index(request):
     all_users=Profile.objects.all()
@@ -45,40 +45,46 @@ def signup(request):
 def showdetail(request, person):
     user=User.objects.filter(username=person)[0]
     prof=Profile.objects.filter(user=user)[0]
-    return render(request,'prof_detail.html', {'prof':prof})
-
+    if request.method== 'POST':
+        if 'addPublication' in request.POST:
+            form = publicationform(request.POST)
+            if form.is_valid():
+                public = form.save(commit=False)
+                public.profile = prof
+                public.publication_title = form.cleaned_data.get('publication_title')
+                public.collaborator = form.cleaned_data.get('collaborator')
+                public.collaborator= form.cleaned_data.get('collaborator_email')
+                public.save()
+                return redirect ( 'mywebsite:detail' , person=prof )
+        elif 'addStudent' in request.POST:
+            form1 = studentform(request.POST)
+            if form1.is_valid():
+                stud = form1.save(commit=False)
+                stud.supervisor = prof
+                stud.name = form1.cleaned_data.get('name')
+                stud.details = form1.cleaned_data.get('details')
+                stud.save()
+                return redirect ( 'mywebsite:detail' , person=prof )
+    else:
+        form=publicationform()
+        form1=studentform()
+    return render( request, 'prof_detail.html' , { 'form':form, 'prof':prof , 'form1':form1 })
 
 def updatedetails(request,whoami):
-    user=User.objects.filter(username=whoami)[0]
-    prof=Profile.objects.filter(user=user)[0]
+    prof=Profile.objects.filter(user=request.user)[0]
     if request.method == 'POST':
-        form = editform(request.POST)
+        form = editform(request.POST,instance=prof)
         if form.is_valid():
-
-
             prof.designation = form.cleaned_data.get('designation')
-            prof.education = form.cleaned_data.get('education')
-            prof.research_interest = form.cleaned_data.get('research_interest')
-            prof.publications = form.cleaned_data.get('publications')
+            prof.webmail=form.cleaned_data.get('webmail')
+            prof.first_name=form.cleaned_data.get('first_name')
+            prof.second_name=form.cleaned_data.get('second_name')
+            prof.phone_number = form.cleaned_data.get('phone_number')
+            prof.fax_number = form.cleaned_data.get('fax_number')
+            prof.department = form.cleaned_data.get('department')
             prof.save()
             return redirect( 'mywebsite:detail' , person = prof )
 
     else:
-        form = editform()
-    return render(request, 'editform.html' , {'form': form})
-
-def profstudents(request,whoami):
-    user=User.objects.filter(username=whoami)[0]
-    prof=Profile.objects.filter(user=user)[0]
-    if request.method== 'POST':
-        form = studentform(request.POST)
-        if form.is_valid():
-            stud = form.save(commit=False)
-            stud.supervisor = prof
-            stud.name = form.cleaned_data.get('name')
-            stud.details = form.cleaned_data.get('details')
-            stud.save()
-            return redirect ( 'mywebsite:detail' , person=prof )
-    else:
-        form=studentform()
-    return render( request, 'update_students.html' , { 'form':form })
+        form = editform(instance=prof)
+    return render(request, 'edit_details.html' , {'form': form})

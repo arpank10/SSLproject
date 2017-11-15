@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% load crispy_forms_tags %}
 {% block content %}
+
 <h1> Edit Details </h1>
 <form method="POST" >
   {% csrf_token %}
