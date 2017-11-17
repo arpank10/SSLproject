@@ -42,6 +42,12 @@
                <li class="list-group-item">
                  <b>Department</b> <a class="pull-right"> {{ prof.department }}</a>
                </li>
+               <li class="list-group-item">
+                {% if request.user.username == prof.user.username %}
+                <b>fb</b>  <a href="{% url 'social:begin' 'facebook' %}" class="pull-right">get current avatar </a>
+                 {% endif %}
+                   <!--{{ prof.fbprofile_photo }} -->
+               </li>
              </ul>
              {% if request.user.username == prof.user.username %}
              <a href="{% url 'mywebsite:update' whoami=prof %}" class="btn btn-primary btn-block"><b>Edit</b></a>
