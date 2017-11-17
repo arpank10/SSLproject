@@ -38,45 +38,28 @@
           <a class="mdl-navigation__link" href="#">Courses</a>
         </nav>
       </div>
-      <main class="mdl-layout__content">
-        <div class="site-content">
-          <div class="mdl-grid site-max-width">
-            <div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--4dp page-content">
-              <div class="mdl-card__title">
-                <h1 class="mdl-card__title-text"> {{ prof.designation }} at IIT Guwahati </h1>
-              </div>
-
-              <div class="mdl-grid site-copy">
-                <div class="mdl-cell mdl-cell--12-col"><p><h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline">Details</h3></p>
-<div class="mdl-cell mdl-cell--10-col mdl-card__supporting-text no-padding ">
-    <p> Mail : {{ prof.webmail }}</p>
-    <p> Phone Number : {{ prof.phone_number }}</p>
-    <p> Department : {{ prof.department }}</p>
-</div>
-
-
-<div class="mdl-grid">
-<h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline">Biography</h3>
-<div class="mdl-cell mdl-cell--12-col mdl-card__supporting-text no-padding ">
-    <p> {{ prof.bio }}    </p>
-</div>
-</div>
-
-<div class="mdl-grid">
-  <h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline">Product</h3>
-  <div class="mdl-cell mdl-cell--9-col mdl-card__supporting-text no-padding ">
-      <p>
-          Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.
-      </p>
-  </div>
-  <div class="mdl-cell mdl-cell--3-col mdl-card__supporting-text no-padding ">
-      <a class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="#">View<span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></a>
-  </div>
-</div>
-</div>
-              </div>
-            </div>
-          </div>
+<div class="homepage-footer">
+  <section class="mdl-grid site-max-width">
+      <div class="mdl-cell mdl-card mdl-cell--12-col mdl-cell--12-col-tablet  mdl-shadow--4dp portfolio-card">
+        <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">Publications</h2>
+        </div>
+        <ul class="demo-list-three mdl-list">
+          {% for p in prof.publica_set.all %}
+            <li class="mdl-list__item mdl-list__item--three-line">
+              <span class="mdl-list__item-primary-content">
+                <i class="material-icons mdl-list__item-avatar">person</i>
+                <span>{{ p.publication_title }}</span>
+                <span class="mdl-list__item-text-body">
+                  Collaborator : {{prof.collaborator}}
+                </span>
+              </span>
+            </li>
+            {% endfor %}
+        </ul>
+      </div>
+  </section>
+</div></div>
         </div>
         <footer class="mdl-mini-footer">
           <div class="footer-container">
