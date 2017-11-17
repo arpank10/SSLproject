@@ -15,7 +15,7 @@ class SignUpForm(UserCreationForm):
 class editform(ModelForm):
     class Meta:
         model=Profile
-        fields = ('designation','first_name','second_name', 'webmail','phone_number','fax_number', 'department')
+        fields = ('designation','first_name','second_name', 'webmail','phone_number','fax_number', 'department','bio')
 
 class studentform(ModelForm):
     class Meta:
@@ -26,3 +26,14 @@ class publicationform(ModelForm):
     class Meta:
         model=Publica
         fields=('publication_title','collaborator','collaborator_email')
+
+class addCourse(ModelForm):
+    class Meta:
+        model=Courses
+        fields=('courseName', 'startDate' , 'endDate' , 'current' )
+
+
+class DocumentForm(forms.ModelForm):
+    class Meta:
+        model = Document
+        fields = ('description', 'document', )

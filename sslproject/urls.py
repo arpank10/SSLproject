@@ -21,5 +21,7 @@ from mywebsite import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^mywebsite/', include('mywebsite.urls')),
+    url(r'^iitg/', include('people.urls')),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
     url(r'^$', views.index, name='index'),
 ]

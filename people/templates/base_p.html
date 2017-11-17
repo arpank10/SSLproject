@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> {{ prof.first_name }} {{ prof.second_name }}</title>
+    <meta name="description" content="Your portfolio page description"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;amp;lang=en" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css" rel="stylesheet">
+    <link href="{% static 'people/styles/main.css' %}" rel="stylesheet">
+  </head>
+  <body id="top">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <a href="contact.html" id="contact-button" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast mdl-shadow--4dp"><i class="material-icons">mail</i></a>
+      <header class="mdl-layout__header mdl-layout__header--waterfall site-header">
+        <div class="mdl-layout__header-row site-logo-row"><span class="mdl-layout__title">
+            <div class="site-logo">
+              <img class="profile-user-img img-responsive img-circle" src="{{ prof.fbprofile_photo }}" alt="User profile picture">
+            </div>
+            <span class="site-description">{{ prof.first_name }} {{ prof.second_name }}</span></span></div>
+        <div class="mdl-layout__header-row site-navigation-row mdl-layout--large-screen-only">
+          <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
+            <a class="mdl-navigation__link" href="#">Publications</a>
+            <a class="mdl-navigation__link" href="#">Research Interests</a>
+            <a class="mdl-navigation__link" href="#">Students</a>
+            <a class="mdl-navigation__link" href="#">Courses</a>
+          </nav>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer mdl-layout--small-screen-only">
+        <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
+          <a class="mdl-navigation__link" href="#">Publications</a>
+          <a class="mdl-navigation__link" href="#">Research Interests</a>
+          <a class="mdl-navigation__link" href="#">Students</a>
+          <a class="mdl-navigation__link" href="#">Courses</a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+        <div class="site-content">
+          <div class="mdl-grid site-max-width">
+            <div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--4dp page-content">
+              <div class="mdl-card__title">
+                <h1 class="mdl-card__title-text"> {{ prof.designation }} at IIT Guwahati </h1>
+              </div>
+
+              <div class="mdl-grid site-copy">
+                <div class="mdl-cell mdl-cell--12-col"><p><h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline">Details</h3></p>
+<div class="mdl-cell mdl-cell--10-col mdl-card__supporting-text no-padding ">
+    <p> Mail : {{ prof.webmail }}</p>
+    <p> Phone Number : {{ prof.phone_number }}</p>
+    <p> Department : {{ prof.department }}</p>
+</div>
+
+
+<div class="mdl-grid">
+<h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline">Biography</h3>
+<div class="mdl-cell mdl-cell--12-col mdl-card__supporting-text no-padding ">
+    <p> {{ prof.bio }}    </p>
+</div>
+</div>
+
+<div class="mdl-grid">
+  <h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline">Product</h3>
+  <div class="mdl-cell mdl-cell--9-col mdl-card__supporting-text no-padding ">
+      <p>
+          Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.
+      </p>
+  </div>
+  <div class="mdl-cell mdl-cell--3-col mdl-card__supporting-text no-padding ">
+      <a class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="#">View<span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></a>
+  </div>
+</div>
+</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="mdl-mini-footer">
+          <div class="footer-container">
+            <div class="mdl-logo">&copy; Unitiled. Design: <a href="https://templateflip.com/" target="_blank">TemplateFlip</a></div>
+            <ul class="mdl-mini-footer__link-list">
+              <li><a href="#">Privacy & Terms</a></li>
+            </ul>
+          </div>
+        </footer>
+      </main>
+      <script src="https://code.getmdl.io/1.3.0/material.min.js" defer></script>
+    </div>
+  </body>
+</html>

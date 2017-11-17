@@ -1,13 +1,20 @@
 from django.shortcuts import render
+import mimetypes
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.utils.encoding import smart_str
 
 from mywebsite.forms import *
 from mywebsite.forms import publicationform
+from django.conf import settings
+from wsgiref.util import FileWrapper
 from django.contrib.auth.models import User
-from mywebsite.models import Profile
+from mywebsite.models import *
+
+
 
 
 @login_required
@@ -19,6 +26,39 @@ def home(request):
 def index(request):
     all_users=Profile.objects.all()
     return render(request, 'all_users.html' , {'all_users':all_users} )
+
+def courses(request,person):
+    user=User.objects.filter(username=person)[0]
+    prof=Profile.objects.filter(user=user)[0]
+    if request.method== 'POST':
+        form = addCourse(request.POST)
+        if form.is_valid():
+            course = form.save(commit=False)
+            course.prof = prof
+            course.courseName = form.cleaned_data.get('courseName')
+            course.startDate = form.cleaned_data.get('startDate')
+            course.endDate = form.cleaned_data.get('endDate')
+            course.current= form.cleaned_data.get('current')
+            course.save()
+            return redirect ( 'mywebsite:courses' , person=prof )
+    else:
+        form = addCourse()
+    return render(request, 'courses.html' , {'prof': prof , 'form': form})
+
+
+def courses_upload(request,course):
+    course=Courses.objects.filter(courseName=course)[0]
+    prof=course.prof
+    if request.method== 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            doc = form.save(commit=False)
+            doc.course_name=course
+            doc.save()
+            return redirect ( 'mywebsite:courses_upload' , course=course )
+    else:
+        form = DocumentForm()
+    return render(request, 'course_upload.html' , { 'prof':prof , 'courses': course , 'form': form })
 
 def signup(request):
     if request.method == 'POST':
@@ -78,6 +118,7 @@ def updatedetails(request,whoami):
             prof.designation = form.cleaned_data.get('designation')
             prof.webmail=form.cleaned_data.get('webmail')
             prof.first_name=form.cleaned_data.get('first_name')
+            prof.bio=form.cleaned_data.get('bio')
             prof.second_name=form.cleaned_data.get('second_name')
             prof.phone_number = form.cleaned_data.get('phone_number')
             prof.fax_number = form.cleaned_data.get('fax_number')
@@ -88,3 +129,13 @@ def updatedetails(request,whoami):
     else:
         form = editform(instance=prof)
     return render(request, 'edit_details.html' , {'form': form})
+
+def download_file(request,file_name):
+    file_path = settings.MEDIA_ROOT +'/'+ file_name
+    file_wrapper = FileWrapper(open(file_path,'rb'))
+    file_mimetype = mimetypes.guess_type(file_path)
+    response = HttpResponse(file_wrapper, content_type=file_mimetype )
+    response['X-Sendfile'] = file_path
+    response['Content-Length'] = os.stat(file_path).st_size
+    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(file_name)
+    return response

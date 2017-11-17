@@ -131,7 +131,7 @@ desired effect
         -------------------------->
 
 				{% if all_users %} {% for person in all_users %}
-					<a href="{% url 'mywebsite:detail' person=person.user.username %}">
+					<a href="{% url 'people:home_people' person=person.user.username %}">
 
 
 

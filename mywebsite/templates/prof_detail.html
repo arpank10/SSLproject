@@ -26,7 +26,7 @@
          <!-- Profile Image -->
          <div class="box box-primary">
            <div class="box-body box-profile">
-             <img class="profile-user-img img-responsive img-circle" src="{% static 'dist/img/user.jpg' %}" alt="User profile picture">
+             <img class="profile-user-img img-responsive img-circle" src="{{ prof.fbprofile_photo }}" alt="User profile picture">
 
              <h3 class="profile-username text-center">{{ prof.first_name }} {{ prof.second_name }}</h3>
 
@@ -42,6 +42,12 @@
                <li class="list-group-item">
                  <b>Department</b> <a class="pull-right"> {{ prof.department }}</a>
                </li>
+               <li class="list-group-item">
+                {% if request.user.username == prof.user.username %}
+                <b>fb</b>  <a href="{% url 'social:begin' 'facebook' %}" class="pull-right">get current avatar </a>
+                 {% endif %}
+                   <!--{{ prof.fbprofile_photo }} -->
+                </li>
              </ul>
              {% if request.user.username == prof.user.username %}
              <a href="{% url 'mywebsite:update' whoami=prof %}" class="btn btn-primary btn-block"><b>Edit</b></a>
@@ -75,13 +81,16 @@
              <strong><i class="fa fa-pencil margin-r-5"></i> Current Courses</strong>
 
              <p>
-               <span class="label label-danger">CS210</span>
-               <span class="label label-success">CS201</span>
-               <span class="label label-info">CS202</span>
-               <span class="label label-warning">HSS240</span>
-               <span class="label label-primary">CS231</span>
+               {% for course in prof.courses_set.all %}
+                  {% if course.current %}
+                    <span class="label label-danger"> {{ course.courseName }}</span>
+                  {% endif %}
+                {% endfor %}
              </p>
-
+             <br>
+             <a href="{% url 'mywebsite:courses' person=prof %}" type="button" class="btn btn-default">
+              See all courses
+            </a>
              <hr>
              {% if prof.bio %}
              <strong><i class="fa fa-file-text-o margin-r-5"></i> Bio</strong>
