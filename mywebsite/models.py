@@ -28,6 +28,7 @@ class Profile(models.Model):
     fax_number = PhoneNumberField(blank=True)
     department = models.CharField(max_length=4, choices=DEP_CHOICES, default='cse')
     designation = models.TextField(max_length=500, blank=True)
+    fbprofile_photo = models.URLField( blank=True)
 
 
     def __str__(self):
