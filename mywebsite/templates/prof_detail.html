@@ -112,9 +112,8 @@
            </ul>
            <div class="tab-content">
              <div class="active tab-pane" id="activity">
-
-               <ul>
                  {% for publication in prof.publica_set.all %}
+                 <ul>
                  <li> {{ publication.publication_title }} </li>
                  {% endfor %}
                </ul>
@@ -187,14 +186,13 @@
         <!-- /.modal-dialog -->
         </div>
 
-
              </div>
              <!-- /.tab-pane -->
 
              <div class="tab-pane" id="settings">
                  {% for student in prof.students_set.all %}
                    <div class="user-block">
-                     <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+                     <img class="img-circle img-bordered-sm" src="{{ student.pic.url }}" alt="user image">
                         <span class="username">
                           <a href="#">{{ student.name }}</a>
                         </span>

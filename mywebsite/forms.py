@@ -21,6 +21,7 @@ class studentform(ModelForm):
     class Meta:
         model=Students
         fields = ('name','details')
+        fields = ('name','details','pic','url')
 
 class publicationform(ModelForm):
     class Meta:

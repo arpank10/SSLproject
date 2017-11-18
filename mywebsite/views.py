@@ -97,7 +97,6 @@ def showdetail(request, person):
                 public.collaborator= form.cleaned_data.get('collaborator_email')
                 public.save()
                 return redirect ( 'mywebsite:detail' , person=prof )
-
         elif 'addResearch' in request.POST:
             form2 = researchform(request.POST)
             if form2.is_valid():
@@ -107,14 +106,15 @@ def showdetail(request, person):
                 public.research_interest_description= form2.cleaned_data.get('research_interest_description')
                 public.save()
                 return redirect ( 'mywebsite:detail' , person=prof )
-
         elif 'addStudent' in request.POST:
             form1 = studentform(request.POST)
             if form1.is_valid():
                 stud = form1.save(commit=False)
                 stud.supervisor = prof
                 stud.name = form1.cleaned_data.get('name')
-                stud.details = form1.cleaned_data.get('details')
+                stud.details = form1.cleaned_data.get
+                stud.pic=form1.cleaned_data.get('pic')
+                stud.url=form1.cleaned_data.get('url')
                 stud.save()
                 return redirect ( 'mywebsite:detail' , person=prof )
     else:

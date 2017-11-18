@@ -45,6 +45,8 @@ class Students(models.Model):
     supervisor=models.ForeignKey(Profile, on_delete=models.CASCADE)
     name=models.CharField(max_length=100,blank=True)
     details=models.TextField(max_length=500, blank=True)
+    pic = models.ImageField(upload_to = 'students_pic/', default = 'students_pic/no-img.jpg')
+    url=models.CharField(max_length=300,blank=True)
 
     def __str__(self):
         return self.name
@@ -71,6 +73,12 @@ class Courses(models.Model):
     prof= models.ForeignKey(Profile, on_delete=models.CASCADE)
     courseName= models.CharField(max_length=10)
     startDate= models.DateField(blank=True,null=True)
+
+
+class Courses(models.Model):
+    prof= models.ForeignKey(Profile, on_delete=models.CASCADE)
+    courseName = models.CharField(max_length=10)
+    startDate = models.DateField(blank=True,null=True)
     endDate = models.DateField(blank=True,null=True)
     current = models.BooleanField(default=False)
 
@@ -83,3 +91,4 @@ class Document(models.Model):
     description = models.CharField(max_length=255, blank=True)
     document = models.FileField()
     uploaded_at = models.DateTimeField(default=timezone.now)
+ 
