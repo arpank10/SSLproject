@@ -61,7 +61,7 @@ class Publica(models.Model):
 
 class Research(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    research_interest_title=models.TextField(max_length=250,blank=True)
+    research_interest_title=models.CharField(max_length=250,blank=True)
     research_interest_description=models.TextField(max_length=1500,blank=True)
 
     def __str__(self):

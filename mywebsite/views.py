@@ -100,7 +100,6 @@ def showdetail(request, person):
 
         elif 'addResearch' in request.POST:
             form2 = researchform(request.POST)
-
             if form2.is_valid():
                 public = form2.save(commit=False)
                 public.profile = prof
@@ -108,7 +107,6 @@ def showdetail(request, person):
                 public.research_interest_description= form2.cleaned_data.get('research_interest_description')
                 public.save()
                 return redirect ( 'mywebsite:detail' , person=prof )
-
 
         elif 'addStudent' in request.POST:
             form1 = studentform(request.POST)

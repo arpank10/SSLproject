@@ -158,11 +158,11 @@
                 <br>
 
              {% if request.user.username == prof.user.username %}
-             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-primary">
+             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-take">
                Add
              </button>
              {% endif %}
-             <div class="modal modal-primary fade" id="modal-primary">
+             <div class="modal modal-danger fade" id="modal-take">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
