@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+  <h2>hi this is  {{ user.profile.first_name }} {{ user.profile.second_name }} !</h2>
+    {% if user.profile.webmail %}
+  <p>webmail:- {{ user.profile.webmail }}</p>
+    {% endif %}
+
+{% endblock %}

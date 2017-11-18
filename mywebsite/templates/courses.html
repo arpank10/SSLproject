@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h> {{ prof.first_name }} {{ prof.second_name }} </h>
+<ul>
+{% for c in prof.courses_set.all %}
+  <li><a href="{% url 'mywebsite:courses_upload' course=c %}">{{ c.courseName }}</a></li>
+
+<br>
+{% endfor %}
+</ul>
+{% if request.user.username == prof.user.username %}
+<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+ Add Courses
+</button>
+{% endif %}
+<div class="modal fade" id="modal-default">
+<div class="modal-dialog">
+<div class="modal-content">
+ <div class="modal-header">
+   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+     <span aria-hidden="true">&times;</span></button>
+   <h4 class="modal-title">Add a course</h4>
+ </div>
+ <div class="modal-body">
+   <form method="POST" >
+     {% csrf_token %}
+     <table border="5">
+       {{ form.as_p }}
+     </table>
+      <button type="submit" name="addPublication" class="save btn btn-primary">Save</button>
+  </form>
+ </div>
+</div>
+<!-- /.modal-content -->
+</div>
+</div>
+{% endblock %}

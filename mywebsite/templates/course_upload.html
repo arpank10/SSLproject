@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>Welcome to {{ courses.courseName }} home page </h1>
+<ul>
+{% for c in courses.document_set.all %}
+  <li><a href="{% url 'mywebsite:download' file_name=c.document.name %}">{{ c.description }}</a></li>
+<br>
+{% endfor %}
+{% if request.user.username == prof.user.username %}
+<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+ Add FILES
+</button>
+{% endif %}
+<div class="modal fade" id="modal-default">
+<div class="modal-dialog">
+<div class="modal-content">
+ <div class="modal-header">
+   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+     <span aria-hidden="true">&times;</span></button>
+   <h4 class="modal-title">Add file</h4>
+ </div>
+ <div class="modal-body">
+   <form method="POST" enctype="multipart/form-data">
+     {% csrf_token %}
+     <table border="5">
+       {{ form|crispy }}
+     </table>
+      <button type="submit" name="addPublication" class="save btn btn-primary">Upload</button>
+  </form>
+ </div>
+</div>
+<!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+</div>
+
+  <p><a href="{% url 'mywebsite:courses' person=prof %}" >Return to course homepage</a></p>
+{% endblock %}
