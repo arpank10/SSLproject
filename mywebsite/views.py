@@ -103,6 +103,8 @@ def showdetail(request, person):
                 stud.supervisor = prof
                 stud.name = form1.cleaned_data.get('name')
                 stud.details = form1.cleaned_data.get('details')
+                stud.pic=form1.cleaned_data.get('pic')
+                stud.url=form1.cleaned_data.get('url')
                 stud.save()
                 return redirect ( 'mywebsite:detail' , person=prof )
     else:

@@ -154,7 +154,7 @@
              <div class="tab-pane" id="settings">
                  {% for student in prof.students_set.all %}
                    <div class="user-block">
-                     <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+                     <img class="img-circle img-bordered-sm" src="{{ student.pic.url }}" alt="user image">
                         <span class="username">
                           <a href="#">{{ student.name }}</a>
                         </span>

@@ -39,29 +39,33 @@
           <a class="mdl-navigation__link" href="{% url 'people:home_students' person=prof.user.username %}">Students</a>
           <a class="mdl-navigation__link" href="#">Courses</a>
         </nav>
-      </div>
-<div class="homepage-footer">
-  <section class="mdl-grid site-max-width">
-      <div class="mdl-cell mdl-card mdl-cell--12-col mdl-cell--12-col-tablet  mdl-shadow--4dp portfolio-card">
-        <div class="mdl-card__title">
-            <h2 class="mdl-card__title-text">Publications</h2>
         </div>
-        <ul class="demo-list-three mdl-list">
-          {% for p in prof.publica_set.all %}
-            <li class="mdl-list__item mdl-list__item--three-line">
-              <span class="mdl-list__item-primary-content">
-                <i class="material-icons mdl-list__item-avatar">bookmark border</i>
-                <span>{{ p.publication_title }}</span>
-                <span class="mdl-list__item-text-body">
-                  Collaborator : {{prof.collaborator}}
-                </span>
-              </span>
-            </li>
-            {% endfor %}
-        </ul>
-      </div>
-  </section>
-</div></div>
+      </header>
+      <main class="mdl-layout__content">
+        <div class="site-content">
+          <div class="container">
+            <div class="mdl-grid site-max-width">
+              {% for s in prof.students_set.all %}
+              <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
+                <div class="mdl-card__media">
+                  <img class="article-image" src="{{ s.pic.url }}" border="0" alt="">
+                </div>
+                <div class="mdl-card__title">
+                  <h2 class="mdl-card__title-text">{{ s.name }}</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                  {{ s.details }}
+                </div>
+                <br>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="{{ s.url }}">
+                    Learn More
+                  </a>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
         </div>
         <footer class="mdl-mini-footer">
           <div class="footer-container">
