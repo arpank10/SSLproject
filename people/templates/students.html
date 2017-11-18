@@ -28,7 +28,7 @@
             <a class="mdl-navigation__link" href="{% url 'people:home_publica' person=prof.user.username %}">Publications</a>
             <a class="mdl-navigation__link" href="#">Research Interests</a>
             <a class="mdl-navigation__link" href="{% url 'people:home_students' person=prof.user.username %}">Students</a>
-            <a class="mdl-navigation__link" href="#">Courses</a>
+            <a class="mdl-navigation__link" href="{% url 'people:home_courses' person=prof.user.username %}">Courses</a>
           </nav>
         </div>
       </header>
@@ -37,7 +37,7 @@
           <a class="mdl-navigation__link" href="{% url 'people:home_publica' person=prof.user.username %}">Publications</a>
           <a class="mdl-navigation__link" href="#">Research Interests</a>
           <a class="mdl-navigation__link" href="{% url 'people:home_students' person=prof.user.username %}">Students</a>
-          <a class="mdl-navigation__link" href="#">Courses</a>
+          <a class="mdl-navigation__link" href="{% url 'people:home_courses' person=prof.user.username %}">Courses</a>
         </nav>
         </div>
       </header>
