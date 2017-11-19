@@ -20,7 +20,7 @@
         <header class="mdl-layout__header mdl-layout__header--waterfall site-header">
             <div class="mdl-layout__header-row site-logo-row"><span class="mdl-layout__title">
             <div class="site-logo">
-              <img class="profile-user-img img-responsive img-circle" src="{{ prof.fbprofile_photo }}" alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle" src="{{ prof.fbprofile_photo }}" onerror="if (this.src != '{% static 'allusers/no_pic.png' %}') this.src = '{% static 'allusers/no_pic.png' %}';">
             </div>
             <span class="site-description">{{ prof.first_name }} {{ prof.second_name }}</span>
                 </span>
