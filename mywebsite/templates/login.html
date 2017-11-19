@@ -13,7 +13,10 @@
 					<p style="color: red">{{ error }}</p>{% endfor %} {% if field.help_text %}
 					<p><small style="color: grey">{{ field.help_text }}</small>
 					</p>{% endif %}</p>{% endfor %}
-				<button class="btn btn-primary" type="submit">Log in</button> 
+					<script src='https://www.google.com/recaptcha/api.js'></script>
+    			<div class="g-recaptcha" data-sitekey="6LdyezkUAAAAAES3V85oFkNvrYuV7SQfdpTjXQ6l"></div>
+					<br>
+				<button class="btn btn-primary" type="submit">Log in</button>
 				<a href="{% url 'mywebsite:signup' %}">First time? Sign up</a>
 			</form>
 		</div>

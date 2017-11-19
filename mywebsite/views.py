@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import mimetypes
-
+import requests
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
@@ -68,7 +68,6 @@ def signup(request):
             user = form.save()
             user.refresh_from_db()  # load the profile instance created by the signal
             person=Profile.objects.filter(user=user)[0]
-
             user.save()
             raw_password = form.cleaned_data.get('password1')
             person.webmail=form.cleaned_data.get('webmail')
@@ -78,6 +77,21 @@ def signup(request):
             person.save()
             user = authenticate(username=user.username, password=raw_password)
             login(request, user)
+            ''' Begin reCAPTCHA validation '''
+            recaptcha_response = request.POST.get('g-recaptcha-response')
+            data = {
+                'secret': settings.RECAPTCHA_PRIVATE_KEY,
+                'response': recaptcha_response
+            }
+            r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
+            result = r.json()
+            ''' End reCAPTCHA validation '''
+
+            if result['success']:
+                form.save()
+                messages.success(request, 'New comment added with success!')
+            else:
+                messages.error(request, 'Invalid reCAPTCHA. Please try again.')
             return redirect('mywebsite:home')
     else:
         form = SignUpForm()

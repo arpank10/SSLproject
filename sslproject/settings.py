@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'mywebsite',
     'people',
     'crispy_forms',
-
+    'captcha',
     'social_django',
 ]
 
@@ -157,6 +157,10 @@ SOCIAL_AUTH_FACEBOOK_SECRET = '41a2d360b6e4367471e6f45cc6e03c54'  # App Secret
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR,]
+
+RECAPTCHA_PUBLIC_KEY = '6LdyezkUAAAAAES3V85oFkNvrYuV7SQfdpTjXQ6l'
+RECAPTCHA_PRIVATE_KEY = '6LdyezkUAAAAAHqTdwM3-Q_B7u434TZZ76TYByWx'
+NOCAPTCHA = True
 
 #MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static','media')
 
