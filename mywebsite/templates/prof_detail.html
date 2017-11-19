@@ -112,8 +112,8 @@
            </ul>
            <div class="tab-content">
              <div class="active tab-pane" id="activity">
+               <ul>
                  {% for publication in prof.publica_set.all %}
-                 <ul>
                  <li> {{ publication.publication_title }} </li>
                  {% endfor %}
                </ul>

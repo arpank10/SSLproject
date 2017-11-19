@@ -71,12 +71,6 @@ class Research(models.Model):
 
 class Courses(models.Model):
     prof= models.ForeignKey(Profile, on_delete=models.CASCADE)
-    courseName= models.CharField(max_length=10)
-    startDate= models.DateField(blank=True,null=True)
-
-
-class Courses(models.Model):
-    prof= models.ForeignKey(Profile, on_delete=models.CASCADE)
     courseName = models.CharField(max_length=10)
     startDate = models.DateField(blank=True,null=True)
     endDate = models.DateField(blank=True,null=True)
@@ -91,4 +85,3 @@ class Document(models.Model):
     description = models.CharField(max_length=255, blank=True)
     document = models.FileField()
     uploaded_at = models.DateTimeField(default=timezone.now)
- 
