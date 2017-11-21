@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'mywebsite',
     'people',
     'crispy_forms',
-    'captcha',
     'social_django',
 ]
 

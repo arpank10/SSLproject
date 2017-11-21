@@ -41,42 +41,28 @@
                 <a class="mdl-navigation__link" href="{% url 'people:home_students' person=prof.user.username %}">Students</a>
                 <a class="mdl-navigation__link" href="{% url 'people:home_courses' person=prof.user.username %}">Courses</a>
             </nav>
-        </div>
-        <div class="homepage-footer">
-            <section class="mdl-grid site-max-width">
-                <div class="mdl-cell mdl-card mdl-cell--12-col mdl-cell--12-col-tablet  mdl-shadow--4dp portfolio-card">
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Publications</h2>
-                    </div>
-                    <ul class="demo-list-three mdl-list">
-                        {% for p in prof.publica_set.all %}
-                        <li class="mdl-list__item mdl-list__item--three-line">
-                            <span class="mdl-list__item-primary-content">
-                              <i class="material-icons mdl-list__item-avatar">bookmark border</i>
-                              <span>{{ p.publication_title }}</span>
-                              <span class="mdl-list__item-text-body">
-                                Collaborator : {{prof.collaborator}}
-                              </span>
-                            </span>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </section>
-        </div>
-        <footer class="mdl-mini-footer">
-            <div class="footer-container">
-                <div class="mdl-logo">&copy; Unitiled. Design: <a href="https://templateflip.com/" target="_blank">TemplateFlip</a>
-                </div>
-                <ul class="mdl-mini-footer__link-list">
-                    <li><a href="#">Privacy & Terms</a>
-                    </li>
-                </ul>
-            </div>
-        </footer>
-        </main>
-        <script src="https://code.getmdl.io/1.3.0/material.min.js" defer></script>
+      </div>
+      <main class="mdl-layout__content">
+        <div class="site-content">
+          <div class="container">
+<section class="section--center mdl-grid site-max-width">
+  {% for r in prof.research_set.all %}
+  <div class="mdl-card mdl-cell mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--8-col-phone  mdl-shadow--4dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">{{ r.research_interest_title }}</h2>
     </div>
-</body>
-
+    <div class="mdl-card__actions  mdl-card--border">
+      <div class="mdl-card__supporting-text">
+      {{ r.research_interest_description }}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+</div>
+        </div>
+      </main>
+      <script src="https://code.getmdl.io/1.3.0/material.min.js" defer></script>
+    </div>
+  </body>
 </html>
