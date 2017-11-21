@@ -50,6 +50,7 @@
                           <ul class="demo-list-three mdl-list">
                               {% for p in prof.courses_set.all %}
                               <li class="mdl-list__item mdl-list__item--three-line">
+                              <div class="mdl-cell mdl-cell--9-col mdl-card__supporting-text no-padding ">
                                   <span class="mdl-list__item-primary-content">
                                     <i class="material-icons mdl-list__item-avatar">archive</i>
                                     <span>{{ p.courseName }}</span>
@@ -57,7 +58,11 @@
                                         ( {{ p.startDate }} - {{ p.endDate }} )
                                     </span>
                                   </span>
-                              </li>
+                                </div>
+                              <div class="mdl-cell mdl-cell--3-col mdl-card__supporting-text no-padding ">
+                                    <a class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="{% url 'people:home_files' person=prof.user.username course=p.courseName %}">View Files<span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></a>
+                              </div>
+                            </li>
                               {% endfor %}
                           </ul>
                         </div>

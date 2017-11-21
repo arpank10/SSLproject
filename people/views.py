@@ -39,3 +39,9 @@ def home_research(request,person):
     user=User.objects.filter(username=person)[0]
     prof=Profile.objects.filter(user=user)[0]
     return render(request, 'research.html', {'prof':prof})
+
+def home_files(request,person,course):
+    user=User.objects.filter(username=person)[0]
+    prof=Profile.objects.filter(user=user)[0]
+    course=Courses.objects.filter(prof=prof,courseName=course)[0]
+    return render(request, 'files.html' ,{'prof':prof,'course': course })
