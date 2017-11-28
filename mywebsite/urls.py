@@ -15,6 +15,12 @@ urlpatterns = [
     url(r'^signup/$', core_views.signup, name='signup'),
     url(r'^(?P<person>[a-zA-Z0-9_]+)/courses$', core_views.courses , name='courses') ,
     url(r'^(?P<course>[a-zA-Z0-9_]+)/courses/upload$', core_views.courses_upload , name='courses_upload'),
+    url(r'^details/(?P<person>[a-zA-Z0-9_]+)/(?P<pub>[a-zA-Z0-9_]+)/publication_edit$', core_views.p_edit , name='publica_edit') ,
+    url(r'^details/(?P<person>[a-zA-Z0-9_]+)/(?P<std>[a-zA-Z0-9_]+)/student_edit$', core_views.s_edit , name='student_edit') ,
+    url(r'^details/(?P<person>[a-zA-Z0-9_]+)/(?P<res>[a-zA-Z0-9_]+)/research_edit$', core_views.r_edit , name='research_edit') ,
+    url(r'^details/(?P<person>[a-zA-Z0-9_]+)/(?P<pub>[a-zA-Z0-9_]+)/publication_delete$', core_views.p_del , name='publica_delete') ,
+    url(r'^details/(?P<person>[a-zA-Z0-9_]+)/(?P<std>[a-zA-Z0-9_]+)/student_delete$', core_views.s_del , name='student_delete') ,
+    url(r'^details/(?P<person>[a-zA-Z0-9_]+)/(?P<res>[a-zA-Z0-9_]+)/research_delete$', core_views.r_del , name='research_delete') ,
     url(r'^download/(?P<file_name>.+)$', core_views.download_file , name='download')
 
 ]

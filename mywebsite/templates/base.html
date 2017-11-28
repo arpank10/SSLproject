@@ -133,12 +133,26 @@ desired effect
 				<!-- /.search form -->
 				<!-- Sidebar Menu -->
 				<ul class="sidebar-menu" data-widget="tree">
-					<li class="header">HEADER</li>
+					<li class="header">HELLO PROFESSOR</li>
 					<!-- Optionally, you can add icons to the links -->
 					{% if user.is_authenticated %}
 					<li class="active"><a href="{% url 'mywebsite:detail' person=user.username %}"><i class="fa fa-link"></i> <span>Home</span></a>
 					</li>
 					<li> <a href="{% url 'mywebsite:logout' %}"><i class="fa fa-link"></i> <span>logout</span></a>
+					</li>
+					<li class="treeview"> <a href="#"><i class="fa fa-link"></i> <span>User Options</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+						<ul class="treeview-menu">
+							<li><a href="{% url 'people:home_people' person=user.username %}">View personal page</a>
+							</li>
+							<li><a href="{% url 'mywebsite:courses' person=user.username %}">See the courses</a>
+							</li>
+							<li><a href="{% url 'mywebsite:update' whoami=user.username %}">Edit Details</a>
+							</li>
+						</ul>
 					</li>
 					{% else %}
 					<li class="active"><a href="{% url 'mywebsite:login' %}"><i class="fa fa-link"></i> <span>Home</span></a>
@@ -146,19 +160,20 @@ desired effect
 					<li> <a href="{% url 'mywebsite:login' %}"><i class="fa fa-link"></i> <span>login</span></a>
 					</li>
 					<li> <a href="{% url 'mywebsite:signup' %}"><i class="fa fa-link"></i> <span>signup</span></a>
-					</li>{% endif %}
-					<li class="treeview"> <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+					</li>
+					<li class="treeview"> <a href="#"><i class="fa fa-link"></i> <span>Web Pages</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
 						<ul class="treeview-menu">
-							<li><a href="#">Link in level 2</a>
+							<li><a href="#">Go to main website</a>
 							</li>
 							<li><a href="#">Link in level 2</a>
 							</li>
 						</ul>
 					</li>
+					{% endif %}
 				</ul>
 				<!-- /.sidebar-menu -->
 			</section>

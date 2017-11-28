@@ -157,6 +157,73 @@ def updatedetails(request,whoami):
     else:
         form = editform(instance=prof)
     return render(request, 'edit_details.html' , {'form': form})
+def p_edit(request,person,pub):
+    prof=Profile.objects.filter(user=request.user)[0]
+    public=Publica.objects.filter(profile=prof,id=pub)[0]
+    if request.method == 'POST':
+        form = publicationform(request.POST,instance=public)
+        if form.is_valid():
+            public.publication_title = form.cleaned_data.get('publication_title')
+            public.collaborator = form.cleaned_data.get('collaborator')
+            public.collaborator_email= form.cleaned_data.get('collaborator_email')
+            public.save()
+            return redirect( 'mywebsite:detail' , person = prof )
+
+    else:
+        form = publicationform(instance=public)
+    return render(request, 'p_edit.html' , {'form': form})
+
+def r_edit(request,person,res):
+    prof=Profile.objects.filter(user=request.user)[0]
+    public=Research.objects.filter(id=res,profile=prof)[0]
+    if request.method == 'POST':
+        form2 = researchform(request.POST,instance=public)
+        if form2.is_valid():
+            public.profile = prof
+            public.research_interest_title = form2.cleaned_data.get('research_interest_title')
+            public.research_interest_description= form2.cleaned_data.get('research_interest_description')
+            public.save()
+            return redirect ( 'mywebsite:detail' , person=prof )
+    else:
+        form2 = researchform(instance=public)
+    return render(request, 'r_edit.html' , {'form': form2})
+
+def s_edit(request,person,std):
+    prof=Profile.objects.filter(user=request.user)[0]
+    stud=Students.objects.filter(id=std,supervisor=prof)[0]
+    if request.method == 'POST':
+        form1 =studentform(request.POST,instance=stud)
+        if form1.is_valid():
+            stud.supervisor = prof
+            stud.name = form1.cleaned_data.get('name')
+            stud.details = form1.cleaned_data.get
+            stud.pic=form1.cleaned_data.get('pic')
+            stud.url=form1.cleaned_data.get('url')
+            stud.save()
+            return redirect ( 'mywebsite:detail' , person=prof )
+
+    else:
+        form1 = studentform(instance=stud)
+    return render(request, 's_edit.html' , {'form': form1})
+
+def s_del(request,person,std):
+    prof=Profile.objects.filter(user=request.user)[0]
+    stud=Students.objects.filter(id=std,supervisor=prof)[0]
+    stud.delete()
+    return redirect ( 'mywebsite:detail' , person=prof )
+
+
+def r_del(request,person,res):
+    prof=Profile.objects.filter(user=request.user)[0]
+    public=Research.objects.filter(id=res,profile=prof)[0]
+    public.delete()
+    return redirect ( 'mywebsite:detail' , person=prof )
+
+def p_del(request,person,pub):
+    prof=Profile.objects.filter(user=request.user)[0]
+    public=Publica.objects.filter(id=pub,profile=prof)[0]
+    public.delete()
+    return redirect ( 'mywebsite:detail' , person=prof )
 
 def download_file(request,file_name):
     file_path = settings.MEDIA_ROOT +'/'+ file_name
