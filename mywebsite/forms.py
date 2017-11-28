@@ -15,7 +15,7 @@ class SignUpForm(UserCreationForm):
 class editform(ModelForm):
     class Meta:
         model=Profile
-        fields = ('designation','first_name','second_name', 'webmail','phone_number','fax_number', 'department','bio')
+        fields = ('designation','first_name','second_name', 'webmail','phone_number','fax_number', 'department','bio','room')
 
 class studentform(ModelForm):
     class Meta:

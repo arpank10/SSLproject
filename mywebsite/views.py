@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib import messages
 from django.utils.encoding import smart_str
 
 from mywebsite.forms import *
@@ -93,7 +94,7 @@ def signup(request):
                 messages.success(request, 'New comment added with success!')
             else:
                 messages.error(request, 'Invalid reCAPTCHA. Please try again.')
-            return redirect('mywebsite:home')
+            return redirect('mywebsite:update', whoami=user )
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
@@ -151,12 +152,14 @@ def updatedetails(request,whoami):
             prof.phone_number = form.cleaned_data.get('phone_number')
             prof.fax_number = form.cleaned_data.get('fax_number')
             prof.department = form.cleaned_data.get('department')
+            prof.room = form.cleaned_data.get('room')
             prof.save()
             return redirect( 'mywebsite:detail' , person = prof )
 
     else:
         form = editform(instance=prof)
     return render(request, 'edit_details.html' , {'form': form})
+
 def p_edit(request,person,pub):
     prof=Profile.objects.filter(user=request.user)[0]
     public=Publica.objects.filter(profile=prof,id=pub)[0]
