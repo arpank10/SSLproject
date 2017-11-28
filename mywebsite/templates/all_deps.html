@@ -34,6 +34,10 @@
 		.img-circle {
 		border-radius: 50%;
 }
+    .dep-image{
+      width: 100%;
+      height: 100%;
+    }
     #view-source {
       position: fixed;
       display: block;
@@ -51,7 +55,7 @@
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
         </div>
         <div  class="mdl-layout--large-screen-only mdl-layout__header-row">
-        <div align="center">  <h3 >CSE department</h3></div>
+        <div align="center">  <h3 >Indian Institute of Technology Guwahati </h3></div>
         </div>
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
         </div>
@@ -67,18 +71,158 @@
             <div class="mdl-card mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone">
               <div class="mdl-card__supporting-text">
                 <h4>CSE</h4>
+                Computer Science and Engineering
               </div>
               <div class="mdl-card__actions">
-                <a href="{% url 'people:home_people' person=person.user.username %}" class="mdl-button"> personal webpage</a>
+                <a href="{% url 'dep_home' dep="CSE" %}" class="mdl-button"> Homepage </a>
               </div>
             </div>
-            <header class="section__play-btn mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
-                   <img class="profile-user-img img-responsive" src="{{ person.fbprofile_photo }}" onerror="if (this.src != '{% static 'allusers/no_pic.png' %}') this.src = '{% static 'allusers/no_pic.png' %}';">
-            </header>
+            <div class="image-container section__play-btn mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
+              <img src="{% static 'departments/CSE.jpg' %}" class="dep-image">
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+              <div class="mdl-card__supporting-text">
+                <h4>MA</h4>
+                Department of Mathematics
+              </div>
+              <div class="mdl-card__actions">
+                <a href="{% url 'dep_home' dep="MA" %}" class="mdl-button"> Homepage </a>
+              </div>
+            </div>
+            <div class="image-container section__play-btn mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
+              <img src="{% static 'departments/MA.png' %}" class="dep-image">
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+              <div class="mdl-card__supporting-text">
+                <h4>ME</h4>
+                Mechanical Engineering
+              </div>
+              <div class="mdl-card__actions">
+                <a href="{% url 'dep_home' dep="ME" %}" class="mdl-button"> Homepage </a>
+              </div>
+            </div>
+            <div class="image-container section__play-btn mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
+              <img src="{% static 'departments/ME.jpg' %}" class="dep-image">
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+              <div class="mdl-card__supporting-text">
+                <h4>PH</h4>
+                Department of Physics
+              </div>
+              <div class="mdl-card__actions">
+                <a href="{% url 'dep_home' dep="PH" %}" class="mdl-button"> Homepage </a>
+              </div>
+            </div>
+            <div class="image-container section__play-btn mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
+              <img src="{% static 'departments/PH.png' %}" class="dep-image">
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+              <div class="mdl-card__supporting-text">
+                <h4>CE</h4>
+                Civil Engineering
+              </div>
+              <div class="mdl-card__actions">
+                <a href="{% url 'dep_home' dep="CE" %}" class="mdl-button"> Homepage </a>
+              </div>
+            </div>
+            <div class="image-container section__play-btn mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
+              <img src="{% static 'departments/CE.jpg' %}" class="dep-image">
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+              <div class="mdl-card__supporting-text">
+                <h4>CST</h4>
+                Department of Chemistry
+              </div>
+              <div class="mdl-card__actions">
+                <a href="{% url 'dep_home' dep="CST" %}" class="mdl-button"> Homepage </a>
+              </div>
+            </div>
+            <div class="image-container section__play-btn mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
+              <img src="{% static 'departments/CST.jpg' %}" class="dep-image">
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+              <div class="mdl-card__supporting-text">
+                <h4>CL</h4>
+                Chemical and Engineering
+              </div>
+              <div class="mdl-card__actions">
+                <a href="{% url 'dep_home' dep="CL" %}" class="mdl-button"> Homepage </a>
+              </div>
+            </div>
+            <div class="image-container section__play-btn mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
+              <img src="{% static 'departments/CL.jpeg' %}" class="dep-image">
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+              <div class="mdl-card__supporting-text">
+                <h4>EEE</h4>
+                Electrical and Electronics Engineering
+              </div>
+              <div class="mdl-card__actions">
+                <a href="{% url 'dep_home' dep="EEE" %}" class="mdl-button"> Homepage </a>
+              </div>
+            </div>
+            <div class="image-container section__play-btn mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
+              <img src="{% static 'departments/EEE.jpg' %}" class="dep-image">
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+              <div class="mdl-card__supporting-text">
+                <h4>BSBE</h4>
+                Biosciences and Bioengineerings
+              </div>
+              <div class="mdl-card__actions">
+                <a href="{% url 'dep_home' dep="BSBE" %}" class="mdl-button"> Homepage </a>
+              </div>
+            </div>
+            <div class="image-container section__play-btn mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
+              <img src="{% static 'departments/BSBE.jpg' %}" class="dep-image">
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+              <div class="mdl-card__supporting-text">
+                <h4>HSS</h4>
+                Humanities and Social Sciences
+              </div>
+              <div class="mdl-card__actions">
+                <a href="{% url 'dep_home' dep="HSS" %}" class="mdl-button"> Homepage </a>
+              </div>
+            </div>
+            <div class="image-container section__play-btn mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
+              <img src="{% static 'departments/HSS.png' %}" class="dep-image">
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+              <div class="mdl-card__supporting-text">
+                <h4>DOD</h4>
+                Department of Design
+              </div>
+              <div class="mdl-card__actions">
+                <a href="{% url 'dep_home' dep="DOD" %}" class="mdl-button"> Homepage </a>
+              </div>
+            </div>
+            <div class="image-container section__play-btn mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
+              <img src="{% static 'departments/DOD.jpg' %}" class="dep-image">
+            </div>
           </section>
       </main>
 			<br>
-			{% endfor %}
     </div>
 
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>

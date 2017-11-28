@@ -28,6 +28,10 @@ def home(request):
 
 def index(request):
     all_users=Profile.objects.all()
+    return render(request, 'all_deps.html' , {'all_users':all_users} )
+
+def dep_home(request,dep):
+    all_users=Profile.objects.filter(department=dep)
     return render(request, 'all_users.html' , {'all_users':all_users} )
 
 def courses(request,person):

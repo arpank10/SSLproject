@@ -14,9 +14,16 @@ from django.utils import timezone
 class Profile(models.Model):
     DEP_CHOICES = (
         ('CSE','CSE'),
-        ('ECE', 'ECE'),
+        ('MA', 'MA'),
         ('EEE','EEE'),
         ('DOD','DOD'),
+        ('CL' , 'CL'),
+        ('CST','CST'),
+        ('CE','CE'),
+        ('HSS','HSS'),
+        ('BSBE','BSBE'),
+        ('PH','PH'),
+        ('ME','ME')
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=1500, blank=True)
@@ -26,7 +33,7 @@ class Profile(models.Model):
     second_name=models.CharField(max_length=500,blank=True)
     phone_number = PhoneNumberField(blank=True)
     fax_number = PhoneNumberField(blank=True)
-    department = models.CharField(max_length=4, choices=DEP_CHOICES, default='cse')
+    department = models.CharField(max_length=4, choices=DEP_CHOICES, default='CSE')
     designation = models.CharField(max_length=500, blank=True)
     room=models.CharField(max_length=100,blank=True)
     fbprofile_photo = models.URLField( blank=True)
