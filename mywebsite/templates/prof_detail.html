@@ -21,8 +21,13 @@
          <!-- Profile Image -->
          <div class="box box-primary">
            <div class="box-body box-profile">
-             <img class="profile-user-img img-responsive img-circle" src="{{ prof.fbprofile_photo }}" alt="User profile picture">
-
+             {% if prof.fbprofile_photo %}
+             <img class="profile-user-img img-responsive img-circle" src="{{ prof.fbprofile_photo }}" onerror="if (this.src != '{% static 'allusers/no_pic.png' %}') this.src = '{% static 'allusers/no_pic.png' %}';">
+             {% elif prof.pic %}
+             <img class="profile-user-img img-responsive img-circle" src="{{ prof.pic.url }}" onerror="if (this.src != '{% static 'allusers/no_pic.png' %}') this.src = '{% static 'allusers/no_pic.png' %}';">
+             {% else %}
+             <img class="profile-user-img img-responsive img-circle" src = '{% static 'allusers/no_pic.png' %}'>
+             {% endif %}
              <h3 class="profile-username text-center">{{ prof.first_name }} {{ prof.second_name }}</h3>
 
              <p class="text-muted text-center">{{ prof.designation }}</p>
@@ -43,6 +48,38 @@
                  {% endif %}
                    <!--{{ prof.fbprofile_photo }} -->
                 </li>
+                <li class="list-group-item">
+                 {% if request.user.username == prof.user.username %}
+                  <button class="btn btn-success"  type="button" data-toggle="modal" data-target="#modal-detail"> Update promotion details</button>
+                  {% endif %}
+                  <div class="modal modal-primary fade" id="modal-detail">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Upload a text file or copy email here</h4>
+                          </div>
+                          <div class="modal-body">
+                            <form method="POST" enctype="multipart/form-data">
+                              {% csrf_token %}
+                              <table border="5">
+                                {{ form3|crispy }}
+                              </table>
+                              <div class="modal-footer">
+                                <button type="submit" name="g" class="save btn btn-primary">check</button>
+                          </div>
+
+                         </form>
+
+
+                     </div>
+                   </div>
+               <!-- /.modal-content -->
+               </div>
+             <!-- /.modal-dialog -->
+           </div>
+         </li>
              </ul>
              {% if request.user.username == prof.user.username %}
              <a href="{% url 'mywebsite:update' whoami=prof %}" class="btn btn-primary btn-block"><b>Edit</b></a>

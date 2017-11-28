@@ -15,7 +15,7 @@ class SignUpForm(UserCreationForm):
 class editform(ModelForm):
     class Meta:
         model=Profile
-        fields = ('designation','first_name','second_name', 'webmail','phone_number','fax_number', 'department','bio','room')
+        fields = ('designation','education','first_name','second_name', 'webmail','phone_number','fax_number', 'department','bio','room','pic')
 
 class studentform(ModelForm):
     class Meta:
@@ -44,3 +44,8 @@ class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
         fields = ('description', 'document', )
+
+class PromotionForm(forms.ModelForm):
+    class Meta:
+        model= Promotion
+        fields = ('document', 'text')

@@ -35,7 +35,9 @@ class Profile(models.Model):
     fax_number = PhoneNumberField(blank=True)
     department = models.CharField(max_length=4, choices=DEP_CHOICES, default='CSE')
     designation = models.CharField(max_length=500, blank=True)
+    education =models.CharField(max_length=500, blank=True)
     room=models.CharField(max_length=100,blank=True)
+    pic = models.ImageField(upload_to = 'prof_pic/',blank=True)
     fbprofile_photo = models.URLField( blank=True)
 
     def __str__(self):
@@ -53,7 +55,7 @@ class Students(models.Model):
     supervisor=models.ForeignKey(Profile, on_delete=models.CASCADE)
     name=models.CharField(max_length=100,blank=True)
     details=models.TextField(max_length=500, blank=True)
-    pic = models.ImageField(upload_to = 'students_pic/', default = 'students_pic/no-img.jpg')
+    pic = models.ImageField(upload_to = 'students_pic/',blank=True)
     url=models.CharField(max_length=300,blank=True)
 
     def __str__(self):
@@ -92,4 +94,9 @@ class Document(models.Model):
     course_name= models.ForeignKey(Courses, on_delete=models.CASCADE)
     description = models.CharField(max_length=255, blank=True)
     document = models.FileField()
+    uploaded_at = models.DateTimeField(default=timezone.now)
+
+class Promotion(models.Model):
+    document = models.FileField(blank=True)
+    text = models.TextField(max_length=3000, blank=True)
     uploaded_at = models.DateTimeField(default=timezone.now)

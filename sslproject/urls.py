@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^iitg/', include('people.urls')),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
     url(r'^$', views.index, name='index'),
-    url(r'^(?P<dep>[a-zA-Z0-9_]+)$', views.dep_home, name='dep_home'),
+    url(r'^faculties/(?P<dep>[a-zA-Z0-9_]+)$', views.dep_home, name='dep_home'),
 ]
 
 if settings.DEBUG is True:

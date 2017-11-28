@@ -20,8 +20,14 @@
       <header class="mdl-layout__header mdl-layout__header--waterfall site-header">
             <div class="mdl-layout__header-row site-logo-row"><span class="mdl-layout__title">
             <div class="site-logo">
+              {% if prof.fbprofile_photo %}
               <img class="profile-user-img img-responsive img-circle" src="{{ prof.fbprofile_photo }}" onerror="if (this.src != '{% static 'allusers/no_pic.png' %}') this.src = '{% static 'allusers/no_pic.png' %}';">
-            </div>
+              {% elif prof.pic %}
+              <img class="profile-user-img img-responsive img-circle" src="{{ prof.pic.url }}" onerror="if (this.src != '{% static 'allusers/no_pic.png' %}') this.src = '{% static 'allusers/no_pic.png' %}';">
+              {% else %}
+              <img class="profile-user-img img-responsive img-circle" src = '{% static 'allusers/no_pic.png' %}'>
+              {% endif %}
+              </div>
             <span class="site-description">{{ prof.first_name }} {{ prof.second_name }}</span>
                 </span>
             </div>

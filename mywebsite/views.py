@@ -24,7 +24,7 @@ from mywebsite.models import *
 def home(request):
     user= request.user
     prof=Profile.objects.filter(user=user)[0]
-    return render(request,'prof_detail.html', {'prof':prof})
+    return redirect ( 'mywebsite:detail' , person=prof )
 
 def index(request):
     all_users=Profile.objects.all()
@@ -32,7 +32,7 @@ def index(request):
 
 def dep_home(request,dep):
     all_users=Profile.objects.filter(department=dep)
-    return render(request, 'all_users.html' , {'all_users':all_users} )
+    return render(request, 'all_users.html' , {'all_users':all_users,'dep':dep} )
 
 def courses(request,person):
     user=User.objects.filter(username=person)[0]
@@ -107,8 +107,12 @@ def showdetail(request, person):
     user=User.objects.filter(username=person)[0]
     prof=Profile.objects.filter(user=user)[0]
     if request.method== 'POST':
+        form = publicationform(request.POST)
+        form1 = studentform(request.POST)
+        form2 = researchform(request.POST)
+        form3 = PromotionForm(request.POST,request.FILES)
         if 'addPublication' in request.POST:
-            form = publicationform(request.POST)
+
             if form.is_valid():
                 public = form.save(commit=False)
                 public.profile = prof
@@ -117,8 +121,9 @@ def showdetail(request, person):
                 public.collaborator= form.cleaned_data.get('collaborator_email')
                 public.save()
                 return redirect ( 'mywebsite:detail' , person=prof )
+
         elif 'addResearch' in request.POST:
-            form2 = researchform(request.POST)
+
             if form2.is_valid():
                 public = form2.save(commit=False)
                 public.profile = prof
@@ -126,25 +131,41 @@ def showdetail(request, person):
                 public.research_interest_description= form2.cleaned_data.get('research_interest_description')
                 public.save()
                 return redirect ( 'mywebsite:detail' , person=prof )
+
         elif 'addStudent' in request.POST:
-            form1 = studentform(request.POST)
             if form1.is_valid():
                 stud = form1.save(commit=False)
                 stud.supervisor = prof
                 stud.name = form1.cleaned_data.get('name')
-                stud.details = form1.cleaned_data.get
+                stud.details = form1.cleaned_data.get('details')
                 stud.pic=form1.cleaned_data.get('pic')
                 stud.url=form1.cleaned_data.get('url')
                 stud.save()
+                return redirect ( 'mywebsite:detail' , person=prof )
+        elif 'g' in request.POST:
+            if form3.is_valid():
+                doc = form3.save(commit=False)
+                doc.prof=prof
+                doc.save()
+                if doc.text:
+                    detect_promotion1(prof,doc.text)
+                else:
+                    file_name= doc.document.name
+                    file_path = settings.MEDIA_ROOT +'/'+ file_name
+                    detect_promotion(prof,file_path)
+                    os.remove(file_path)
+                doc.delete()
                 return redirect ( 'mywebsite:detail' , person=prof )
     else:
         form=publicationform()
         form1=studentform()
         form2=researchform()
-    return render( request, 'prof_detail.html' , { 'form':form, 'prof':prof , 'form1':form1,'form2':form2  })
+        form3=PromotionForm()
+    return render( request, 'prof_detail.html' , { 'form':form, 'prof':prof , 'form1':form1,'form2':form2 ,'form3':form3  })
 
 def updatedetails(request,whoami):
-    prof=Profile.objects.filter(user=request.user)[0]
+    user=User.objects.filter(username=whoami)[0]
+    prof=Profile.objects.filter(user=user)[0]
     if request.method == 'POST':
         form = editform(request.POST,instance=prof)
         if form.is_valid():
@@ -241,3 +262,61 @@ def download_file(request,file_name):
     response['Content-Length'] = os.stat(file_path).st_size
     response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(file_name)
     return response
+
+
+def detect_promotion(prof,file_path):
+    new_position = []
+    flag=-1
+    str=""
+    with open(file_path) as file:
+        content = file.readlines()
+        for line in content:
+            words = line.split()
+            for word in words:
+                if "promot" in word:
+                    flag=1
+                if flag==1:
+                    if "assistant" in word or "Assistant" in word or "Associate" in word or "associate" in word:
+                        new_position.append(word)
+                    if "professor" in word or "Professor" in word:
+                        new_position.append(word)
+                    if "HOD" in word or "hod" in word:
+                        new_position.append(word)
+                    if "Dean" in word or "dean" in word:
+                        new_position.append(word)
+                    if "Director" in word or "director" in word:
+                        new_position.append(word)
+                    if "Head" in word or "head" in word:
+                        new_position.append(word+" of department")
+    if flag==1:
+        prof.designation=str.join(new_position)
+    else:
+        prof.designation=prof.designation
+    prof.save()
+
+def detect_promotion1(prof,content):
+    new_position = []
+    flag=-1
+    str=""
+    words = content.split()
+    for word in words:
+        if "promoted" in word:
+            flag=1
+        if flag==1:
+            if "assistant" in word or "Assistant" in word or "Associate" in word or "associate" in word:
+                new_position.append(word)
+            if "professor" in word or "Professor" in word:
+                new_position.append(word)
+            if "HOD" in word or "hod" in word or "Head of Department" in word:
+                new_position.append(word)
+            if "Dean" in word or "dean" in word:
+                new_position.append(word)
+            if "Director" in word or "director" in word:
+                new_position.append(word)
+            if "Head" in word or "head" in word:
+                new_position.append(word+" of department")
+    if flag==1:
+        prof.designation=str.join(new_position)
+    else:
+        prof.designation=prof.designation
+    prof.save()
