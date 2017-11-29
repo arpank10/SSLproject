@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
-{% block content %}
+{% block content %}py
 <h1> {{ prof.first_name }} {{ prof.second_name }} </h1>
 {% for c in prof.courses_set.all %}
   <div class="row">
