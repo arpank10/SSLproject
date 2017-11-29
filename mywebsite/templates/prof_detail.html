@@ -43,14 +43,17 @@
                  <b>Department</b> <a class="pull-right"> {{ prof.department }}</a>
                </li>
                <li class="list-group-item">
+                 <b>Room No</b> <a class="pull-right"> {{ prof.room }}</a>
+               </li>
+               <li class="list-group-item">
                 {% if request.user.username == prof.user.username %}
-                <b>fb</b>  <a href="{% url 'social:begin' 'facebook' %}" class="pull-right">get current avatar </a>
+                <b>Facebook</b>  <a href="{% url 'social:begin' 'facebook' %}" class="pull-right">Get current avatar </a>
                  {% endif %}
                    <!--{{ prof.fbprofile_photo }} -->
                 </li>
                 <li class="list-group-item">
                  {% if request.user.username == prof.user.username %}
-                  <button class="btn btn-success"  type="button" data-toggle="modal" data-target="#modal-detail"> Update promotion details</button>
+                  <button class="btn btn-success btn-block"  type="button" data-toggle="modal" data-target="#modal-detail"> Update promotion details</button>
                   {% endif %}
                   <div class="modal modal-primary fade" id="modal-detail">
                     <div class="modal-dialog">
@@ -102,14 +105,6 @@
               {{ prof.education }}
              </p>
 
-             <hr>
-
-             <strong><i class="fa fa-map-marker margin-r-5"></i> Home Town</strong>
-
-             <p class="text-muted">Guwahati,India</p>
-
-             <hr>
-
              <strong><i class="fa fa-pencil margin-r-5"></i> Current Courses</strong>
 
              <p>
@@ -146,7 +141,7 @@
              <div class="active tab-pane" id="activity">
                  {% for publication in prof.publica_set.all %}
                  <div class="row">
-                    <div class="col-md-9">{{ publication.publication_title }}</div>
+                    <div class="col-md-9"><span class="glyphicon glyphicon-rub" aria-hidden="true"></span> {{ publication.publication_title }}</div>
                     <div class="col-md-3">
                   <a href="{% url 'mywebsite:publica_edit' person=prof.user.username pub=publication.id %}"  class="btn btn-default">
                   <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
@@ -194,7 +189,7 @@
              <div class="tab-pane" id="timeline">
                     {% for re in prof.research_set.all %}
                     <div class="row">
-                       <div class="col-md-9"> {{ re.research_interest_title }} </div>
+                       <div class="col-md-9"> <span class="glyphicon glyphicon-education" aria-hidden="true"></span> {{ re.research_interest_title }} </div>
                        <div class="col-md-3">
                      <a href="{% url 'mywebsite:research_edit' person=prof.user.username res=re.id %}"  class="btn btn-default">
                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>

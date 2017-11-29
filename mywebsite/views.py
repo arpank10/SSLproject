@@ -273,7 +273,7 @@ def detect_promotion(prof,file_path):
         for line in content:
             words = line.split()
             for word in words:
-                if "promot" in word:
+                if "promot" in word or "Promot" in word:
                     flag=1
                 if flag==1:
                     if "assistant" in word or "Assistant" in word or "Associate" in word or "associate" in word:
@@ -300,14 +300,14 @@ def detect_promotion1(prof,content):
     str=""
     words = content.split()
     for word in words:
-        if "promoted" in word:
+        if "promot" in word or "Promot" in word:
             flag=1
         if flag==1:
             if "assistant" in word or "Assistant" in word or "Associate" in word or "associate" in word:
                 new_position.append(word)
             if "professor" in word or "Professor" in word:
                 new_position.append(word)
-            if "HOD" in word or "hod" in word or "Head of Department" in word:
+            if "HOD" in word or "hod" in word:
                 new_position.append(word)
             if "Dean" in word or "dean" in word:
                 new_position.append(word)
