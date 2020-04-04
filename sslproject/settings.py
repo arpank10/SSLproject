@@ -11,17 +11,22 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import environ
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# <snip other settings>
+
+env = environ.Env(DEBUG=(bool, False))
+environ.Env.read_env()
+
+# Build paths inside the project like this: os.path.join
+# (BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_DIR = os.path.join(BASE_DIR,"static")
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
-
+# See https://docs.djangoproject.com/en/1.11/howto/.en
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '4jus(01i7s%6nr*b&((tj#i^qn#^of!^9!vb-*@8#bt7=e^i7-'
-
+SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -151,14 +156,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-SOCIAL_AUTH_FACEBOOK_KEY = '371626159927872'  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = '41a2d360b6e4367471e6f45cc6e03c54'  # App Secret
+SOCIAL_AUTH_FACEBOOK_KEY = env('SOCIAL_AUTH_FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = env('SOCIAL_AUTH_FACEBOOK_SECRET')
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR,]
 
-RECAPTCHA_PUBLIC_KEY = '6LdyezkUAAAAAES3V85oFkNvrYuV7SQfdpTjXQ6l'
-RECAPTCHA_PRIVATE_KEY = '6LdyezkUAAAAAHqTdwM3-Q_B7u434TZZ76TYByWx'
+RECAPTCHA_PUBLIC_KEY = env('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = env('RECAPTCHA_PRIVATE_KEY')
 NOCAPTCHA = True
 
 #MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static','media')
